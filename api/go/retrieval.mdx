@@ -233,6 +233,38 @@ type EmbeddingProvider interface {
 
 ---
 
+## RetrieveByType
+
+```go
+func (svc *Service) RetrieveByType(ctx context.Context, memType schema.MemoryType, trust *TrustContext) ([]*schema.MemoryRecord, error)
+```
+
+Fetches all records of the given memory type that pass the trust context check, sorted by salience descending.
+
+<ParamField path="memType" type="schema.MemoryType" required>
+  The memory type to query: `episodic`, `working`, `semantic`, `competence`, or `plan_graph`.
+</ParamField>
+
+<ParamField path="trust" type="*TrustContext" required>
+  Trust context for access control. Must not be `nil`.
+</ParamField>
+
+```go
+records, err := svc.RetrieveByType(ctx, schema.MemoryTypeCompetence, trust)
+if err != nil {
+    log.Fatal(err)
+}
+for _, rec := range records {
+    fmt.Println(rec.ID, rec.Confidence)
+}
+```
+
+<Note>
+  `RetrieveByType` is a lower-level convenience method on `Service`. The top-level `Membrane` facade does not expose it directly — use `Retrieve` with `MemoryTypes` set for equivalent behaviour through the public API.
+</Note>
+
+---
+
 ## Errors
 
 | Symbol | Description |

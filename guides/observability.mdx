@@ -28,6 +28,7 @@ Membrane exposes behavioral metrics via `GetMetrics` and ships a comprehensive e
 
 ```json
 {
+  "collected_at": "2026-02-05T14:23:10Z",
   "total_records": 142,
   "records_by_type": {
     "episodic": 80,
@@ -62,6 +63,7 @@ Membrane exposes behavioral metrics via `GetMetrics` and ships a comprehensive e
 
 | Metric | Type | Description |
 |--------|------|-------------|
+| `collected_at` | `string` | RFC 3339 timestamp when the snapshot was collected |
 | `total_records` | `int` | Total number of records in the store |
 | `records_by_type` | `map[string]int` | Count of records per memory type |
 | `avg_salience` | `float64` | Mean salience across all records |

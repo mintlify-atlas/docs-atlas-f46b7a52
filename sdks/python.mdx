@@ -696,6 +696,45 @@ class OutcomeStatus(str, Enum):
     PARTIAL = "partial"
 ```
 
+### `Relation`
+
+```python
+@dataclass
+class Relation:
+    target_id: str = ""   # ID of the related MemoryRecord
+    kind: str = ""        # relationship type (maps to Go Predicate)
+    weight: float = 1.0   # strength of the relationship [0, 1]
+```
+
+<Note>
+  The Python `Relation.kind` field maps to Go's `schema.Relation.Predicate`. Common values: `supports`, `contradicts`, `derived_from`, `supersedes`, `contested_by`.
+</Note>
+
+### Additional exported types
+
+All of the following are importable from the top-level `membrane` package:
+
+```python
+from membrane import (
+    AuditAction,     # Enum: create, revise, fork, merge, delete, reinforce, decay
+    AuditEntry,      # Dataclass: action, actor, timestamp, rationale
+    DecayCurve,      # Enum: EXPONENTIAL = "exponential"
+    DecayProfile,    # Dataclass: curve, half_life_seconds
+    DeletionPolicy,  # Enum: AUTO_PRUNE, MANUAL_ONLY, NEVER
+    EdgeKind,        # Enum: DATA = "data", CONTROL = "control"
+    Lifecycle,       # Dataclass: decay, last_reinforced_at, deletion_policy
+    ProvenanceKind,  # Enum: EVENT, ARTIFACT, TOOL_CALL, OBSERVATION, OUTCOME
+    ProvenanceSource,# Dataclass: kind, ref, timestamp
+    Provenance,      # Dataclass: sources (list[ProvenanceSource])
+    Relation,        # Dataclass: target_id, kind, weight
+    RetrieveResult,  # Dataclass: records, selection
+    RevisionStatus,  # Enum: ACTIVE, CONTESTED, RETRACTED
+    SelectionResult, # Dataclass: selected, confidence, needs_more
+    TaskState,       # Enum: PLANNING, EXECUTING, BLOCKED, WAITING, DONE
+    ValidityMode,    # Enum: GLOBAL, CONDITIONAL, TIMEBOXED
+)
+```
+
 ---
 
 ## Error handling
