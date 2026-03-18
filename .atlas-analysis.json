@@ -1,0 +1,124 @@
+{
+  "projectType": "framework",
+  "projectName": "Membrane",
+  "projectDescription": "A selective learning and memory substrate for LLM and agentic systems, providing typed, revisable, decayable memory with competence learning and trust-aware retrieval.",
+  "theme": "palm",
+  "primaryColor": "#6366F1",
+  "lightColor": "#EEF2FF",
+  "darkColor": "#312E81",
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Documentation",
+        "groups": [
+          {
+            "group": "Get Started",
+            "pages": [
+              "introduction",
+              "quickstart",
+              "architecture"
+            ]
+          },
+          {
+            "group": "Core Concepts",
+            "pages": [
+              "concepts/memory-types",
+              "concepts/trust-and-sensitivity",
+              "concepts/decay-and-consolidation",
+              "concepts/revision-operations",
+              "concepts/competence-learning",
+              "concepts/plan-graphs"
+            ]
+          },
+          {
+            "group": "Guides",
+            "pages": [
+              "guides/go-library",
+              "guides/llm-integration",
+              "guides/deployment",
+              "guides/configuration",
+              "guides/security",
+              "guides/observability"
+            ]
+          },
+          {
+            "group": "Client SDKs",
+            "pages": [
+              "sdks/typescript",
+              "sdks/python",
+              "sdks/openclaw-plugin"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "API Reference",
+        "groups": [
+          {
+            "group": "gRPC API",
+            "pages": [
+              "api/overview",
+              "api/ingestion",
+              "api/retrieval",
+              "api/revision",
+              "api/metrics"
+            ]
+          },
+          {
+            "group": "Go Library",
+            "pages": [
+              "api/go/membrane",
+              "api/go/schema",
+              "api/go/ingestion",
+              "api/go/retrieval",
+              "api/go/revision"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "keyFeatures": [
+    "Typed memory records (episodic, working, semantic, competence, plan_graph) with explicit schemas and lifecycle rules",
+    "Revisable knowledge with supersede, fork, retract, merge, and contest operations and full audit trails",
+    "Trust-aware retrieval with configurable sensitivity levels (public, low, medium, high, hyper)",
+    "Time-based salience decay with exponential curves and automatic pruning",
+    "Background consolidation extracting semantic facts and competence records from episodic traces",
+    "LLM-backed semantic extraction pipeline (Postgres + LLM tier)",
+    "Vector-aware retrieval with pgvector embedding similarity scoring",
+    "SQLCipher encryption at rest, optional TLS, API key authentication, and rate limiting",
+    "15-method gRPC API with TypeScript and Python client SDKs",
+    "Embedded Go library mode (no daemon required)",
+    "Observability metrics: retrieval usefulness, competence success rate, plan reuse frequency, revision rate",
+    "OpenClaw plugin for automatic memory injection into agent turns"
+  ],
+  "publicApiSurface": [
+    "membrane.New(cfg *Config) (*Membrane, error)",
+    "membrane.DefaultConfig() *Config",
+    "membrane.LoadConfig(path string) (*Config, error)",
+    "Membrane.IngestEvent(ctx, IngestEventRequest) (*MemoryRecord, error)",
+    "Membrane.IngestToolOutput(ctx, IngestToolOutputRequest) (*MemoryRecord, error)",
+    "Membrane.IngestObservation(ctx, IngestObservationRequest) (*MemoryRecord, error)",
+    "Membrane.IngestOutcome(ctx, IngestOutcomeRequest) (*MemoryRecord, error)",
+    "Membrane.IngestWorkingState(ctx, IngestWorkingStateRequest) (*MemoryRecord, error)",
+    "Membrane.Retrieve(ctx, *RetrieveRequest) (*RetrieveResponse, error)",
+    "Membrane.RetrieveByID(ctx, id string, trust *TrustContext) (*MemoryRecord, error)",
+    "Membrane.Supersede(ctx, oldID, newRec, actor, rationale) (*MemoryRecord, error)",
+    "Membrane.Fork(ctx, sourceID, forkedRec, actor, rationale) (*MemoryRecord, error)",
+    "Membrane.Retract(ctx, id, actor, rationale) error",
+    "Membrane.Merge(ctx, ids, mergedRec, actor, rationale) (*MemoryRecord, error)",
+    "Membrane.Contest(ctx, id, contestingRef, actor, rationale) error",
+    "Membrane.Reinforce(ctx, id, actor, rationale) error",
+    "Membrane.Penalize(ctx, id, amount, actor, rationale) error",
+    "Membrane.GetMetrics(ctx) (*metrics.Snapshot, error)",
+    "Membrane.Start(ctx context.Context) error",
+    "Membrane.Stop() error",
+    "gRPC: IngestEvent, IngestToolOutput, IngestObservation, IngestOutcome, IngestWorkingState",
+    "gRPC: Retrieve, RetrieveByID",
+    "gRPC: Supersede, Fork, Retract, Merge, Contest",
+    "gRPC: Reinforce, Penalize, GetMetrics",
+    "TypeScript: MembraneClient (npm: @gustycube/membrane)",
+    "Python: MembraneClient (pip: membrane)",
+    "OpenClaw Plugin: @vainplex/openclaw-membrane"
+  ]
+}
